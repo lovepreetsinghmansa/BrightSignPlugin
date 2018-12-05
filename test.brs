@@ -50,3 +50,17 @@ sub updateUserVariable(userVariables as object,name as string,value as string)
 		? "Plugin Error: Unable to update variable."
 	end if
 end sub
+
+function getUserVariableValue(userVariables as object,name as string) as string
+	retval = ""
+	if userVariables <> invalid and name <> invalid then
+		if userVariables.lookup(name) <> invalid then
+			retval = userVariables.Lookup(name).getCurrentValue()
+		else
+			? "User variable " + name + " not found."
+		end if
+	else
+		? "Plugin Error: Unable to get variable value."
+	end if
+	return retval
+end function
