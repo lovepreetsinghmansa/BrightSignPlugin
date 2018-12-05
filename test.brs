@@ -1,9 +1,9 @@
-Function test_Initialize(msgPort As Object, userVariables As Object, bsp as Object)
-    test = newtest(msgPort, userVariables, bsp)
-    return test
-End Function
+function test_Initialize(msgPort as object, userVariables as object, bsp as object)
+	test = newtest(msgPort, userVariables, bsp)
+	return test
+end function
 
-Function newtest(msgPort As Object, userVariables As Object, bsp as Object)
+function newtest(msgPort as object, userVariables as object, bsp as object)
 	s = {}
 	s.version = 1
 	s.msgPort = msgPort
@@ -13,20 +13,40 @@ Function newtest(msgPort As Object, userVariables As Object, bsp as Object)
 	s.objectName = "test_object"
 	s.debug  = true
 	return s
-End Function
+end function
 
-Function test_ProcessEvent(event As Object) as boolean
+function test_ProcessEvent(event as object) as boolean
 	if type(event) = "roAssociativeArray" then
-        if type(event["EventType"]) = "roString" then
-             if (event["EventType"] = "SEND_PLUGIN_MESSAGE") then
-                if event["PluginName"] = "test" then
+		if type(event["EventType"]) = "roString" then
+			if (event["EventType"] = "SEND_PLUGIN_MESSAGE") then
+				if event["PluginName"] = "test" then
 					pluginMessege$ = event["PluginMessage"]
 					if pluginMessege$ = "message" then
 						? "Plugin working successfully"
-					endif
-				endif
-            endif
-        endif
-	endif
+					end if
+				end if
+			end if
+		end if
+	end if
 	return false
-End Function
+end function
+
+sub sendPluginMessage(msgport as object, message$ as string)
+	pluginMessageCmd = CreateObject("roAssociativeArray")
+	pluginMessageCmd["EventType"] = "EVENT_PLUGIN_MESSAGE"
+	pluginMessageCmd["PluginName"] = "test"
+	pluginMessageCmd["PluginMessage"] = message$
+	msgPort.PostMessage(pluginMessageCmd)
+end sub
+
+sub updateUserVariable(userVariables as object,name as string,value as string)
+	if userVariables <> invalid and name <> invalid and value <> invalid then
+		if userVariables.lookup(name) <> invalid then
+			userVariables.Lookup(name).setCurrentValue(value,false)
+		else
+			? "User variable " + name + " not found."
+		end if
+	else
+		? "Plugin Error: Unable to update variable."
+	end if
+end sub
