@@ -42,7 +42,7 @@ end sub
 sub updateUserVariable(userVariables as object,name as string,value as string)
 	if userVariables <> invalid and name <> invalid and value <> invalid then
 		if userVariables.lookup(name) <> invalid then
-			userVariables.Lookup(name).setCurrentValue(value,false)
+			userVariables.Lookup(name).setCurrentValue(value,true)
 		else
 			? "User variable " + name + " not found."
 		end if
