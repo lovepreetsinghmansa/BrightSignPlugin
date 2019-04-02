@@ -39,28 +39,25 @@ sub sendPluginMessage(msgport as object, message$ as string)
 	msgPort.PostMessage(pluginMessageCmd)
 end sub
 
-sub updateUserVariable(userVariables as object,name as string,value as string)
+function updateUserVariable(userVariables as object,name as string,value as string)
 	if userVariables <> invalid and name <> invalid and value <> invalid then
 		if userVariables.lookup(name) <> invalid then
 			userVariables.Lookup(name).setCurrentValue(value,true)
+			return true
 		else
-			? "User variable " + name + " not found."
+			return false
 		end if
 	else
-		? "Plugin Error: Unable to update variable."
+		return false
 	end if
-end sub
+end function
 
 function getUserVariableValue(userVariables as object,name as string) as string
-	retval = ""
+	retval = invalid
 	if userVariables <> invalid and name <> invalid then
 		if userVariables.lookup(name) <> invalid then
 			retval = userVariables.Lookup(name).getCurrentValue()
-		else
-			? "User variable " + name + " not found."
 		end if
-	else
-		? "Plugin Error: Unable to get variable value."
 	end if
 	return retval
 end function
