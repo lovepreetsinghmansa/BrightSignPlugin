@@ -20,8 +20,8 @@ function test_ProcessEvent(event as object) as boolean
 		if type(event["EventType"]) = "roString" then
 			if (event["EventType"] = "SEND_PLUGIN_MESSAGE") then
 				if event["PluginName"] = "test" then
-					pluginMessege$ = event["PluginMessage"]
-					if pluginMessege$ = "message" then
+					pluginMessage$ = event["PluginMessage"]
+					if pluginMessage$ = "message" then
 						? "Plugin working successfully"
 					end if
 				end if
