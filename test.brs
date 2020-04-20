@@ -61,3 +61,16 @@ function getUserVariableValue(userVariables as object,name as string) as string
 	end if
 	return retval
 end function
+
+function resetUserVariable(userVariables as object, name as string)
+	if userVariables <> invalid and name <> invalid then
+		if userVariables.lookup(name) <> invalid then
+			userVariables.Lookup(name).Reset(true)
+			return true
+		else
+			return false
+		end if
+	else
+		return false
+	end if
+end function
