@@ -4,3 +4,7 @@ function printRegistryKeys()
         print registrysection.GetKeyList().GetEntry(i) + " ---> " + registrysection.read(registrysection.GetKeyList().GetEntry(i))
     end for
 end function
+
+function changeDeviceName()
+nc = createobject("roregistrysection","networking") : nc.write("un","NewName") : nc.flush() : rebootsystem()
+end function
