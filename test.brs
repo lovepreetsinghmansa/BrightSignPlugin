@@ -31,7 +31,7 @@ function test_ProcessEvent(event as object) as boolean
 	return false
 end function
 
-sub sendPluginMessage(msgport as object, message$ as string)
+sub sendPluginMessage(msgPort as object, message$ as string)
 	pluginMessageCmd = CreateObject("roAssociativeArray")
 	pluginMessageCmd["EventType"] = "EVENT_PLUGIN_MESSAGE"
 	pluginMessageCmd["PluginName"] = "test"
