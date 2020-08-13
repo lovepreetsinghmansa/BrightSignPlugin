@@ -41,7 +41,7 @@ end sub
 
 function updateUserVariable(userVariables as object,name as string,value as string)
 	if userVariables <> invalid and name <> invalid and value <> invalid then
-		if userVariables.lookup(name) <> invalid then
+		if userVariables.doesexist(name) <> invalid then
 			userVariables.Lookup(name).setCurrentValue(value,true)
 			return true
 		else
@@ -55,7 +55,7 @@ end function
 function getUserVariableValue(userVariables as object,name as string) as string
 	retval = invalid
 	if userVariables <> invalid and name <> invalid then
-		if userVariables.lookup(name) <> invalid then
+		if userVariables.doesexist(name) <> invalid then
 			retval = userVariables.Lookup(name).getCurrentValue()
 		end if
 	end if
@@ -64,7 +64,7 @@ end function
 
 function resetUserVariable(userVariables as object, name as string)
 	if userVariables <> invalid and name <> invalid then
-		if userVariables.lookup(name) <> invalid then
+		if userVariables.doesexist(name) <> invalid then
 			userVariables.Lookup(name).Reset(true)
 			return true
 		else
