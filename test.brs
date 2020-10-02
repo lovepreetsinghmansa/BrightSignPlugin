@@ -39,7 +39,7 @@ sub sendPluginMessage(msgPort as object, message$ as string)
 	msgPort.PostMessage(pluginMessageCmd)
 end sub
 
-function updateUserVariable(userVariables as object,name as string,value as string)
+function updateUserVariabletest(userVariables as object,name as string,value as string)
 	if userVariables <> invalid and name <> invalid and value <> invalid then
 		if userVariables.doesexist(name) <> invalid then
 			userVariables.Lookup(name).setCurrentValue(value,true)
@@ -52,7 +52,7 @@ function updateUserVariable(userVariables as object,name as string,value as stri
 	end if
 end function
 
-function getUserVariableValue(userVariables as object,name as string) as string
+function getUserVariableValuetest(userVariables as object,name as string) as string
 	retval = invalid
 	if userVariables <> invalid and name <> invalid then
 		if userVariables.doesexist(name) <> invalid then
@@ -62,7 +62,7 @@ function getUserVariableValue(userVariables as object,name as string) as string
 	return retval
 end function
 
-function resetUserVariable(userVariables as object, name as string)
+function resetUserVariabletest(userVariables as object, name as string)
 	if userVariables <> invalid and name <> invalid then
 		if userVariables.doesexist(name) <> invalid then
 			userVariables.Lookup(name).Reset(true)
